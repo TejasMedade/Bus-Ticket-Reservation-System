@@ -1,0 +1,100 @@
+CREATE TABLE ADMIN
+(
+
+Admin_id VARCHAR(10) PRIMARY KEY NOT NULL,
+Admin_password VARCHAR(15)
+
+);
+
+CREATE TABLE USER
+(
+
+User_name VARCHAR(15) NOT NULL,
+User_contact VARCHAR(10) NOT NULL,
+User_email VARCHAR(25) NOT NULL,
+User_id VARCHAR(20) NOT NULL PRIMARY KEY,
+User_password VARCHAR(15) NOT NULL
+
+);
+
+
+
+CREATE TABLE BUS
+(
+
+Bus_No INT NOT NULL PRIMARY KEY,
+Passenger_Capacity INT NOT NULL,
+Available_Seats INT NOT NULL,
+Bus_Type VARCHAR(10) NOT NULL,
+
+
+);
+
+
+CREATE TABLE ROUTE
+(
+
+Bus_No INT NOT NULL,
+Source VARCHAR(15) NOT NULL,
+Destination VARCHAR(15) NOT NULL,
+Distancs_KMs INT NOT NULL,
+Fare_Per_KMs INT NOT NULL,
+Day DATE NOT NULL,
+Arrival_Time TIME NOT NULL,
+Departure_Time TIME NOT NULL,
+FOREIGN KEY (Bus_No) REFERENCES BUS(Bus_No)
+
+);
+
+
+CREATE TABLE BOOKING
+(
+
+Booking_No INT PRIMARY KEY AUTO_INCREMENT,
+User_id VARCHAR(20) NOT NULL,
+Bus_No INT NOT NULL,
+No_of_Tickets INT NOT NULL,
+Status BOOLEAN DEFAULT 0,
+Travel_Date DATE NOT NULL,
+FOREIGN KEY (User_id) REFERENCES USER(User_id),
+FOREIGN KEY (Bus_No) REFERENCES ROUTE(Bus_No)
+
+);
+
+
+
+//Inserting Data into Admin;
+
+INSERT INTO ADMIN VALUES('Admin_01','Admin@01');
+
+//Inserting Data into User;
+
+INSERT INTO USER VALUES('Tejas Medade','9307710594','tejas@mail.com','T@123','1610');
+
+//Inserting Values into Bus;
+
+mysql> INSERT INTO BUS VALUES(101,50,'AC',50);
+
+mysql> INSERT INTO BUS VALUES(102,50,'NON-AC',50);
+
+//Inserting Data into Route;
+
+INSERT INTO ROUTE VALUES(101,'KALYAN','THANE',30,1.5,'2022-09-30 07:45:50','2022-09-30 08:00:30');
+
+//Booking a Ticket;
+
+INSERT INTO BOOKING(User_id,Bus_No,No_of_Tickets) VALUES ('T@123',101,4);
+
+//Calculation Total Fare;
+
+Select Distancs_KMs*Fare_Per_KMs Total_Fare from Route Where Bus_no = 101;
+
+//SHOW BUS TIMETBALE;
+
+Select * from Route order by Arrival_Time  ;
+
+// SHOW STATUS OF RESERVATION;
+
+SELECT booking.Booking_no, user.user_id, user.user_name, booking.bus_no, bus.bus_type, route.source,route.destination, booking.No_of_Tickets, route.Distancs_KMs*route.Fare_Per_KMs Total_Fare,route.Arrival_Time,route.Departure_Time, booking.status from Booking booking INNER JOIN Route route INNER JOIN Bus bus INNER JOIN User user ON booking.bus_no = route.bus_no AND route.bus_no = bus.bus_no AND booking.user_id = 'T@123';
+
+Select day from route where day = '2022-09-30';
