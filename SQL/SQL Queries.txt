@@ -47,7 +47,7 @@ FOREIGN KEY (Bus_No) REFERENCES BUS(Bus_No),
 PRIMARY KEY(Route_id,Day)
 
 );
-INSERT INTO ROUTE(Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(101,'KALYAN','THANE',30,1.5,'2022-09-30', '07:45:50','08:00:30');
+
 
 CREATE TABLE BOOKING
 (
@@ -67,17 +67,10 @@ FOREIGN KEY (Bus_No) REFERENCES BUS(Bus_No)
 
 
 
-//Inserting Data into Admin;
-
-INSERT INTO ADMIN VALUES('Admin_01','Admin@01');
 
 //Inserting Data into User;
 
-INSERT INTO USER VALUES('Tejas Medade','9307710594','tejas@mail.com','T@123','1610');
-
-INSERT INTO USER VALUES('Lata Medade','1234567890','shreyas@mail.com','L@123','1810');
-
-INSERT INTO USER VALUES('Demo User','1234567890','demo@gmail.com','Demo@123','demouser@01');
+INSERT INTO USER VALUES('Demo User','9307710594','demo@gmail.com','Demo@123','Demo@456');
 
 
 //Inserting Values into Bus;
@@ -91,6 +84,8 @@ INSERT INTO USER VALUES('Demo User','1234567890','demo@gmail.com','Demo@123','de
  INSERT INTO BUS VALUES(104,50,50,'AC');
 
  INSERT INTO BUS VALUES(105,50,50,'NON-AC');
+
+
 
 //Inserting Data into Route;
 
@@ -135,26 +130,34 @@ INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('
 
 Select Distancs_KMs*Fare_Per_KMs Total_Fare from Route Where Bus_no = 101;
 
+
+
 //SHOW BUS TIMETBALE;
 
- SELECT * FROM ROUTE ORDER BY DAY,ARRIVAL_TIME;
+SELECT * FROM ROUTE ORDER BY DAY,ARRIVAL_TIME;
+
+
 
 // SHOW STATUS OF ALL RESERVATION;
 
 SELECT booking.Booking_no, booking.user_id, booking.bus_no, bus.bus_type, route.source,route.destination, booking.No_of_Tickets, route.Distance*route.Fare_Per_KMs*booking.No_of_Tickets Total_Fare,route.Arrival_Time, route.Departure_Time, route.day, booking.status from booking booking inner join route route inner join Bus bus on booking.bus_no = route.bus_no AND bus.bus_no = route.bus_no AND bOOKING.travel_date = route.day;
+
 
 // SHOW STATUS OF A PARTICULAR RESERVATION;
 
 
 SELECT booking.Booking_no, booking.user_id, booking.bus_no, bus.bus_type, route.source,route.destination, booking.No_of_Tickets, route.Distance*route.Fare_Per_KMs*booking.No_of_Tickets Total_Fare,route.Arrival_Time, route.Departure_Time, route.day, booking.status from booking booking inner join route route inner join Bus bus on booking.bus_no = route.bus_no AND bus.bus_no = route.bus_no AND bOOKING.travel_date = route.day AND BOOKING.USER_ID="T@123";
 
+
 //Confirming ticket from admin;
 
 UPDATE booking set status = 1 where status = 0 AND booking_no = ?;
 
+
 //show confirmed status;
 
 SELECT * FROM BOOKING WHERE STATUS = 1 ;
+
 
 //PERSON CONTACT DETAILS;
 
