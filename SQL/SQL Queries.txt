@@ -1,15 +1,18 @@
 
+Queries That will help You To Understand and Create Demo Data for running the application.
 
-use bus_reservation_system;
+**CREATE A ADMIN FROM SQL SERVER BEFORE PROCEDING FURTHER**
 
+//INSERTING ENTRIES INTO ADMIN
 
+INSERT INTO ADMIN VALUES('Admin_01','Admin@01');
 
-//Inserting Data into User;
+//INSERTING ENTRIES INTO USER
 
 INSERT INTO USER VALUES('Demo User','9307710594','demo@gmail.com','Demo@123','Demo@456');
 
 
-//Inserting Values into Bus;
+//INSERTING ENTRIES INTO BUS
 
  INSERT INTO BUS VALUES(101,50,50,'AC');
 
@@ -22,56 +25,19 @@ INSERT INTO USER VALUES('Demo User','9307710594','demo@gmail.com','Demo@123','De
  INSERT INTO BUS VALUES(105,50,50,'NON-AC');
 
 
+//INSERTING ENTRIES INTO ROUTE
 
-//Inserting Data into Route;
+ INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distance,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1001,101,'KALYAN','THANE',30,1.5,'2022-09-30', '07:45:50','08:00:30');
+ 
 
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1001,101,'KALYAN','THANE',30,1.5,'2022-09-30', '07:45:50','08:00:30');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1002,102,'KALYAN','PANVEL',50,3,'2022-09-30', '06:45:00', '07:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1003,103,'THANE','VASAI',70,2,'2022-09-28', '09:45:00', '10:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1004,104,'KALYAN','DADAR',40,2,'2022-09-30','13:45:00', '14:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1005,105,'KALYAN','KARJAT',40,3,'2022-09-30','16:45:00', '17:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1001,101,'KALYAN','THANE',30,1.5,'2022-10-01', '07:45:50', '08:00:30');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1002,102,'KALYAN','PANVEL',50,3,'2022-10-01', '06:45:00', '07:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1003,103,'THANE','VASAI',70,2,'2022-09-30', '09:45:00', '10:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1005,104,'KALYAN','DADAR',40,2,'2022-10-01' ,'13:45:00', '14:00:00');
-
-INSERT INTO ROUTE(Route_id,Bus_No,Source,Destination,Distancs_KMs,Fare_Per_KMs,Day,Arrival_Time,Departure_Time) VALUES(1006,105,'KALYAN','KARJAT',40,3,'2022-10-01' ,'16:45:00','17:00:00');
-
-
-//Booking a Ticket;
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('T@123',1002,101,4,'2022-10-01');
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('T@123',1002,101,3,'2022-10-01');
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('T@123',1005,104,5,'2022-10-01');
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('T@123',1002,101,1,2022-09-30');
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('T@123',1002,101,6,'2022-09-01');
-
-INSERT INTO BOOKING(User_id,Route_id,Bus_no,No_of_Tickets,Travel_Date) VALUES ('L@123',1005,105,3,'2022-10-01');
-
-
-
-//Calculation Total Fare;
+//TOTAL AFRE CALCULATION;
 
 Select Distancs_KMs*Fare_Per_KMs Total_Fare from Route Where Bus_no = 101;
-
 
 
 //SHOW BUS TIMETBALE;
 
 SELECT * FROM ROUTE ORDER BY DAY,ARRIVAL_TIME;
-
 
 
 // SHOW STATUS OF ALL RESERVATION;
@@ -81,11 +47,10 @@ SELECT booking.Booking_no, booking.user_id, booking.bus_no, bus.bus_type, route.
 
 // SHOW STATUS OF A PARTICULAR RESERVATION;
 
-
 SELECT booking.Booking_no, booking.user_id, booking.bus_no, bus.bus_type, route.source,route.destination, booking.No_of_Tickets, route.Distance*route.Fare_Per_KMs*booking.No_of_Tickets Total_Fare,route.Arrival_Time, route.Departure_Time, route.day, booking.status from booking booking inner join route route inner join Bus bus on booking.bus_no = route.bus_no AND bus.bus_no = route.bus_no AND bOOKING.travel_date = route.day AND BOOKING.USER_ID="T@123";
 
 
-//Confirming ticket from admin;
+//CONFRIM RESERVATION FROM ADMIN;
 
 UPDATE booking set status = 1 where status = 0 AND booking_no = ?;
 
