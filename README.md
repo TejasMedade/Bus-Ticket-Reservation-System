@@ -155,7 +155,7 @@ Don't forget to give the project a star ! Thank You !
 ## Acknowledgements
 
 
-- [@Mohit Agrawal](https://github.com/mohitagrawal22)
+- [Mohit Agrawal](https://github.com/mohitagrawal22)
 
 - [Masai School](https://www.masaischool.com/)
  
