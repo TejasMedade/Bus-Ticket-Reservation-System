@@ -2,7 +2,7 @@
 ![Logo](https://nimbus-screenshots.s3.amazonaws.com/s/8d438c76f2e2bc1848e7d0d81907c802.png)
 
 
-# Bus Reservation System
+## Bus Reservation System
 
  **C.L.I BASED APPLICATION**
 
@@ -15,16 +15,12 @@ The application will be used by the **two** categories of users:
 - **Admin (Administrator)**
 
 - **User (Passenger)** 
+
 ## Tech Stack
 
 - JAVA
 - J.D.B.C
 - MYSQL
-
-
-
-
-
 
 
 ## System Structure
